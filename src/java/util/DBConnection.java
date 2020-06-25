@@ -20,7 +20,7 @@ public abstract class  DBConnection {
 
         try {
              Class.forName("org.mariadb.jdbc.Driver");//driver yolunu gösteriyoruz.
-            this.connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/kafestokotomasyonu?user=root&password=123456789");
+            this.connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/kafastok", "postgres", "6612");
              System.out.println("Baglantı başarili");  
 
         } catch (Exception e) {

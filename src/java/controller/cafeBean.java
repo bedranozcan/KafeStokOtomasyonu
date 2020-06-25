@@ -70,13 +70,8 @@ public class cafeBean implements Serializable {
 
     public void create() {
         this.getCafedao().create(cafeentity);
-        this.clearForm();
 
-        // return "/cafe/list";
-    }
-
-    public void clearForm() {
-        this.cafeentity = new cafe();
+        //return "/cafe/list";
     }
 
 //    public cafe getById(int id){
@@ -85,8 +80,7 @@ public class cafeBean implements Serializable {
 //        
 //    }
     public List<cafe> getRead() {//xhtml read diye bir degişken varmış  gibi görür
-        return this.getCafedao().read();
-
+        return this.getCafedao().read(page, pageSize);
     }
 
     public void updateForm(cafe i) {

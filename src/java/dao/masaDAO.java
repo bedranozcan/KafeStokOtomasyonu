@@ -45,26 +45,26 @@ public class masaDAO extends DBConnection {
 
     }
 
-    public List<masa> read(int page, int pageSize) {
-        List<masa> list = new ArrayList<>();
-        int start = 0;
-        start = (page - 1) * pageSize;
-        try {
-            Statement st = this.connect().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM public.\"masa\" ORDER BY id LIMIT " + pageSize + " OFFSET " + start + " ");
-            while (rs.next()) {
-                // masa tmp= new masa(masa_id, null, null, null);
-                masa tmp = new masa(rs.getInt("masa_id"), rs.getString("konum"));
-                //masa tmp=new masa(masa_id, null, fiyatı, stokadedi, masa_id);
-                list.add(tmp);
-
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-
-        }
-        return list;
-    }
+//    public List<masa> read(int page, int pageSize) {
+//        List<masa> list = new ArrayList<>();
+//        int start = 0;
+//        start = (page - 1) * pageSize;
+//        try {
+//            Statement st = this.connect().createStatement();
+//            ResultSet rs = st.executeQuery("SELECT * FROM public.\"masa\" ORDER BY id LIMIT " + pageSize + " OFFSET " + start + " ");
+//            while (rs.next()) {
+//                // masa tmp= new masa(masa_id, null, null, null);
+//                masa tmp = new masa(rs.getInt("masa_id"), rs.getString("konum"));
+//                //masa tmp=new masa(masa_id, null, fiyatı, stokadedi, masa_id);
+//                list.add(tmp);
+//
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//
+//        }
+//        return list;
+//    }
 
     public List<masa> read() {
         List<masa> list = new ArrayList<>();

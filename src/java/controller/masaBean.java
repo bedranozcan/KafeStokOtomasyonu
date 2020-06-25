@@ -23,46 +23,6 @@ public class masaBean implements Serializable {
     private masaDAO masadao;
     private masa masaentity;
 
-    private int page = 1;
-    private int pageSize = 3;
-    //private List<masa> juryList;
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public int pageCount() {
-        return (int) Math.ceil(this.getMasadao().read().size() / (double) pageSize);
-    }
-
-    public void previous() {
-        if (this.page == 1) {
-            this.page = this.pageCount();
-        } else {
-            this.page--;
-        }
-    }
-
-    public void next() {
-        if (this.page == this.pageCount()) {
-            this.page = 1;
-        } else {
-            this.page++;
-        }
-    }
-
     public void create() {
         this.getMasadao().create(masaentity);
         this.clearForm();
@@ -76,7 +36,7 @@ public class masaBean implements Serializable {
 //        
 //    }
     public List<masa> getRead() {//xhtml read diye bir degişken varmış  gibi görür
-        return this.getMasadao().read(page, pageSize);
+        return this.getMasadao().read();
     }
 
     public void updateForm(masa i) {

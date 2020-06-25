@@ -54,7 +54,7 @@ public class cafeDAO extends DBConnection {
         List<cafe> list = new ArrayList<>();
         int start = (page - 1) * pageSize;
         try {
-            PreparedStatement pst = this.connect().prepareStatement("SELECT * FROM public.\"cafe\" ORDER BY id LIMIT "+pageSize+" OFFSET "+start+" ");
+            PreparedStatement pst = this.connect().prepareStatement("SELECT * FROM public.\"cafe\" LIMIT " + pageSize + " OFFSET " + start + " ");
             //Statement st = this.connect().createStatement();
             ResultSet rs = pst.executeQuery();
             //  ResultSet rs = st.executeQuery("select*from cafe order by cafe_id asc");
@@ -76,15 +76,16 @@ public class cafeDAO extends DBConnection {
         List<cafe> list = new ArrayList<>();
 
         try {
-            PreparedStatement pst = this.connect().prepareStatement("SELECT * FROM public.\"cafe\" ORDER BY id ");
+            PreparedStatement pst = this.connect().prepareStatement("select*from cafe order by cafe_id  ");
             //Statement st = this.connect().createStatement();
             ResultSet rs = pst.executeQuery();
             //  ResultSet rs = st.executeQuery("select*from cafe order by cafe_id asc");
             while (rs.next()) {
-                cafe c = new cafe();
-                c.setAdres(rs.getString("addres"));
-                c.setCafe_id(rs.getInt("cafe_id"));
-                list.add(c);
+                // cafe tmp= new cafe(cafe_id, null, null, null);
+                cafe tmp = new cafe(rs.getInt("cafe_id"), rs.getString("addres"));
+                //cafe tmp=new cafe(cafe_id, null, fiyatı, stokadedi, cafe_id);
+                list.add(tmp);
+
             }
 
         } catch (Exception e) {
@@ -113,11 +114,10 @@ public class cafeDAO extends DBConnection {
 //    }
     public void update(cafe i) {
         try {
-//            PreparedStatement pst = this.connect().prepareStatement("update cafe set addres='" + i.getAdres()+"'where cafe_id="+i.getCafe_id());
-//            pst.executeUpdate();
-            //pst.setString(1, i.getAdres());
-            Statement st = this.connect().createStatement();
-            st.executeUpdate("update cafe set addres='" + i.getAdres() + "'where cafe_id=" + i.getCafe_id());
+            PreparedStatement pst = this.connect().prepareStatement("insert into cafe (addres) values(?)");
+            pst.setString(1, i.getAdres());
+            // Statement st = this.connect().createStatement();
+            //st.executeUpdate("update cafe set addres='" + i.getAdres() + "'where cafe_id=" + i.getCafe_id());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
